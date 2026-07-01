@@ -3,15 +3,15 @@ include "includes/db.php";
 
 if(isset($_POST['register']))
 {
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
+    $fullname = trim($_POST['fullname']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
     // Strong Password Validation
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $password))
     {
         echo "<script>
-        alert('Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number.');
+        alert('Password must contain at least 8 characters, one uppercase letter, one lowercase letter and one number.');
         window.history.back();
         </script>";
         exit();
@@ -19,70 +19,138 @@ if(isset($_POST['register']))
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users(fullname,email,password)
-            VALUES('$fullname','$email','$password')";
+    $check = mysqli_query($conn,"SELECT * FROM users WHERE email='$email'");
 
-    if(mysqli_query($conn,$sql))
+    if(mysqli_num_rows($check)>0)
     {
+        echo "<script>alert('Email already exists!');</script>";
+    }
+    else
+    {
+        mysqli_query($conn,"INSERT INTO users(fullname,email,password)
+        VALUES('$fullname','$email','$password')");
+
         echo "<script>
         alert('Registration Successful!');
         window.location='login.php';
         </script>";
     }
-    else
-    {
-        echo "<script>alert('Error while registering!');</script>";
-    }
 }
 ?>
 
 <!DOCTYPE html>
+<html>
 <head>
-    <title>User Management System</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>User Registration</title>
 
-    <link rel="stylesheet" href="assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/style.css">
+
 </head>
+
 <body>
 
-<h2>User Registration</h2>
+<div class="login-container">
+
+<div class="login-card">
+
+<h1>📝 Create Account</h1>
+
+<p>Create your account to continue</p>
 
 <form method="POST">
 
-    <input type="text" name="fullname"
-    placeholder="Full Name" required><br><br>
+<input
+type="text"
+name="fullname"
+placeholder="👤 Full Name"
+required>
 
-    <input type="email" name="email"
-    placeholder="Email" required><br><br>
+<input
+type="email"
+name="email"
+placeholder="📧 Email Address"
+required>
 
-   <input type="password"
-       name="password"
-       placeholder="Enter Strong Password"
-       required
-       minlength="8"
-       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
-       title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number.">
-     
-       <small style="color:#666;">
+<input
+type="password"
+id="password"
+name="password"
+placeholder="🔒 Password"
+required
+minlength="8"
+pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
+title="Minimum 8 characters, one uppercase, one lowercase and one number">
+
+<label style="font-size:14px;">
+<input type="checkbox" onclick="togglePassword()">
+ Show Password
+</label>
+
+<br><br>
+
+<small>
 Password must contain:
-<ul style="margin-top:5px;">
-    <li>✅ At least 8 characters</li>
-    <li>✅ One uppercase letter (A-Z)</li>
-    <li>✅ One lowercase letter (a-z)</li>
-    <li>✅ One number (0-9)</li>
-</ul>
 </small>
 
-    <button type="submit" name="register">
-        Register
-    </button>
+<ul>
+<li>✔ Minimum 8 characters</li>
+<li>✔ One Uppercase Letter</li>
+<li>✔ One Lowercase Letter</li>
+<li>✔ One Number</li>
+</ul>
+
+<button type="submit" name="register">
+
+Register
+
+</button>
 
 </form>
 
-<footer style="text-align:center;padding:20px;margin-top:40px;color:#666;font-size:14px;">
-    © 2026 User Management System | Developed by M. Vinuthna
+<br>
+
+<div style="text-align:center;">
+
+Already have an account?
+
+<br><br>
+
+<a href="login.php" class="link">
+
+Login Here
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 User Management System | Developed by M. Vinuthna
+
 </footer>
+
+<script>
+
+function togglePassword(){
+
+var x=document.getElementById("password");
+
+if(x.type==="password")
+x.type="text";
+else
+x.type="password";
+
+}
+
+</script>
 
 </body>
 </html>
