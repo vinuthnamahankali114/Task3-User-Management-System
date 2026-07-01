@@ -1,0 +1,165 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:#1E1B4B;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+}
+
+.sidebar h2{
+    color:white;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.sidebar a:hover{
+    background:#7C3AED;
+}
+
+.main{
+    margin-left:270px;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.btn{
+    background:#7C3AED;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.btn:hover{
+    opacity:0.9;
+}
+
+/* Login & Register Pages */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.login-container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-card{
+    width:400px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    animation:fadeIn .7s ease;
+}
+
+.login-card h1{
+    text-align:center;
+    color:#5b4bdb;
+}
+
+.login-card p{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+}
+
+.login-card input{
+    width:100%;
+    padding:15px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    box-sizing:border-box;
+    transition:.3s;
+}
+
+.login-card input:focus{
+    border-color:#6c63ff;
+    outline:none;
+    box-shadow:0 0 10px rgba(108,99,255,.2);
+}
+
+.login-card button{
+    width:100%;
+    padding:15px;
+    background:#6c63ff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-card button:hover{
+    background:#5447d9;
+    transform:translateY(-2px);
+}
+
+.link{
+    text-decoration:none;
+    color:#6c63ff;
+    font-weight:600;
+}
+
+.link:hover{
+    color:#4a3dc5;
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
